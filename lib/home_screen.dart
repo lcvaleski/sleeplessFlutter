@@ -15,6 +15,8 @@ class _HomeScreenState extends State<HomeScreen> {
   late final AudioPlayer player;
   late final AssetSource path;
 
+  final String audioUrl = 'https://sleeplesslv.s3.us-east-2.amazonaws.com/sleepless-2024-02-24.mp3';
+
   Duration _duration = const Duration();
   Duration _position = const Duration();
 
@@ -32,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future initPlayer() async {
     player = AudioPlayer();
-    path = AssetSource('audios/ukulele.mp3');
 
     // set a callback for changing duration
     player.onDurationChanged.listen((Duration d) {
@@ -46,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // set a callback for when audio ends
     player.onPlayerComplete.listen((_) {
-      setState(() => _position = _duration);
+      setState(() => isPlaying = false);
     });
   }
 
@@ -55,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
       player.pause();
       isPlaying = false;
     } else {
-      player.play(path);
+      await player.play(UrlSource(audioUrl));
       isPlaying = true;
     }
     setState(() {});
@@ -81,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
               min: 0,
               max: _duration.inSeconds.toDouble(),
               inactiveColor: Colors.grey,
-              activeColor: Colors.red,
+              activeColor: Colors.deepPurple,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -105,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: playPause,
                   child: Icon(
                     isPlaying ? Icons.pause_circle : Icons.play_circle,
-                    color: Colors.red,
+                    color: Colors.deepPurple,
                     size: 100,
                   ),
                 ),

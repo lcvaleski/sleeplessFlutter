@@ -8,20 +8,20 @@ class AudioInfo extends StatelessWidget {
     return Column(
       children: [
         Image.asset(
-          'assets/images/vinyl_record.png',
+          'assets/images/image.png',
           width: 250,
         ),
         const SizedBox(height: 30),
         const Text(
-          'Ukulele',
+          'Daily Story',
           style: TextStyle(fontSize: 30),
         ),
         const SizedBox(height: 20),
         const Text(
-          'Benjamin Tissot',
+          'Meandering Classics',
           style: TextStyle(
             fontSize: 16,
-            color: Colors.red,
+            color: Colors.deepPurple,
           ),
         ),
       ],
